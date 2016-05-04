@@ -18,7 +18,8 @@ from ..utils.exceptions import AstropyDeprecationWarning
 
 __all__ = ['AiryDisk2D', 'Moffat1D', 'Moffat2D', 'Box1D', 'Box2D', 'Const1D',
            'Const2D', 'Ellipse2D', 'Disk2D', 'Gaussian1D',
-           'GaussianAbsorption1D', 'Gaussian2D', 'Linear1D', 'Lorentz1D',
+           'GaussianAbsorption1D', 'Gaussian2D', 'HexagonA', 'Linear1D', 
+           'Lorentz1D',
            'MexicanHat1D', 'MexicanHat2D', 'RedshiftScaleFactor', 'Redshift',
            'Scale', 'Sersic1D', 'Sersic2D', 'Shift', 'Sine1D', 'Trapezoid1D',
            'TrapezoidDisk2D', 'Ring2D', 'custom_model_1d', 'Voigt1D']
@@ -1601,6 +1602,37 @@ class TrapezoidDisk2D(Fittable2DModel):
 
         return ((self.y_0 - dr, self.y_0 + dr),
                 (self.x_0 - dr, self.x_0 + dr))
+
+
+class HexagonA(Fittable2DModel):
+
+    amplitude = Parameter(default=1)
+    x_0 = Parameter(default=0)
+    y_0 = Parameter(default=0)
+    radius = Parameter(default=1)
+
+    @staticmethod
+    def evaluate(x, y, amplitude, x_0, y_0, radius):
+        d = radius * 2
+        dx = np.abs(x - x_0) / d
+        dy = np.abs(y - y_0) / d
+        a = 0.25 * math.sqrt(3.0)
+        sel1 = (dy <= a)
+        sel2 = (a * dx + 0.25 * dy <= 0.5 * a)
+        return np.select([np.logical_and(sel1, sel2)],
+                         [amplitude], 0)
+
+    @property
+    def bounding_box(self):
+        """
+        Tuple defining the default ``bounding_box``.
+
+        ``((y_low, y_high), (x_low, x_high))``
+        """
+        a = 0.25 * math.sqrt(3.0)
+        d = 2 * self.radius
+        return ((self.y_0 - a * d, self.y_0 + a * d),
+                (self.x_0 - self.radius, self.x_0 + self.radius))
 
 
 class MexicanHat1D(Fittable1DModel):

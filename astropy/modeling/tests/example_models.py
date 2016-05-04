@@ -55,7 +55,7 @@ from __future__ import (absolute_import, division, print_function,
 from ..functional_models import (
     Gaussian1D, Sine1D, Box1D, Linear1D, Lorentz1D,
     MexicanHat1D, Trapezoid1D, Const1D, Moffat1D,
-    Gaussian2D, Const2D, Box2D, MexicanHat2D,
+    Gaussian2D, Const2D, Box2D, HexagonA, MexicanHat2D,
     TrapezoidDisk2D, AiryDisk2D, Moffat2D, Disk2D,
     Ring2D, Sersic1D, Sersic2D, Voigt1D)
 from ..polynomial import Polynomial1D, Polynomial2D
@@ -231,6 +231,16 @@ models_2D = {
     },
 
     Box2D: {
+        'parameters': [1, 0, 0, 10, 10],
+        'x_values': [-5, 5, -5, 5, 0, -10, 10],
+        'y_values': [-5, 5, 0, 0, 0, -10, 10],
+        'z_values': [1, 1, 1, 1, 1, 0, 0],
+        'x_lim': [-10, 10],
+        'y_lim': [-10, 10],
+        'integral': 100
+    },
+
+    HexagonA: {
         'parameters': [1, 0, 0, 10, 10],
         'x_values': [-5, 5, -5, 5, 0, -10, 10],
         'y_values': [-5, 5, 0, 0, 0, -10, 10],
