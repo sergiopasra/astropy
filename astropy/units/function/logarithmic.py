@@ -325,6 +325,9 @@ STmag.__doc__ = "ST magnitude: STmag=-21.1 corresponds to 1 erg/s/cm2/A"
 ABmag = MagUnit(mag0.AB)
 ABmag.__doc__ = "AB magnitude: ABmag=-48.6 corresponds to 1 erg/s/cm2/Hz"
 
+absABmag = MagUnit(mag0.absAB)
+absABmag.__doc__ = "Absolute AB magnitude: absABmag=34.1 corresponds to 1 Watt/Hz"
+
 M_bol = MagUnit(mag0.Bol)
 M_bol.__doc__ = ("Absolute bolometric magnitude: M_bol=0 corresponds to "
                  "L_bol0={0}".format(mag0.Bol.si))

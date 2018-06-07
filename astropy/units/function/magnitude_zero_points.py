@@ -31,6 +31,10 @@ def_unit(['AB'], 10.**(-0.4*48.6) * 1.e-3 * si.W / si.m**2 / si.Hz,
 def_unit(['ST'], 10.**(-0.4*21.1) * 1.e-3 * si.W / si.m**2 / si.AA,
          namespace=_ns, prefixes=False,
          doc="ST magnitude zero flux density.")
+def_unit(['absAB', 'L_AB'], 10.**(0.4*34.1) * si.W / si.Hz,
+         namespace=_ns, prefixes=False,
+         doc="Luminosity corresponding to absolute AB magnitude zero.")
+
 
 ###########################################################################
 # CLEANUP
